@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    tools:context=".ui.results.ResultsActivity">
+
+    <!-- App Bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/gradient_toolbar"
+            app:title="@string/analysis_results"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Main Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Plant Image Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- Plant Image -->
+                    <ImageView
+                        android:id="@+id/iv_plant_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Plant image"
+                        tools:src="@drawable/placeholder_plant" />
+
+                    <!-- Image Overlay -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/gradient_image_overlay" />
+
+                    <!-- Confidence Badge -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="16dp"
+                        android:background="@drawable/bg_confidence_badge"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_analytics"
+                            android:layout_marginEnd="4dp"
+                            app:tint="@color/white" />
+
+                        <TextView
+                            android:id="@+id/tv_confidence_badge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="94%"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            tools:text="94%" />
+
+                    </LinearLayout>
+
+                    <!-- Scan Date -->
+                    <TextView
+                        android:id="@+id/tv_scan_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_margin="16dp"
+                        android:text="Today, 2:30 PM"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="Today, 2:30 PM" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Health Status Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Plant Name -->
+                    <TextView
+                        android:id="@+id/tv_plant_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apple Plant"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/gray_dark"
+                        android:layout_marginBottom="8dp"
+                        tools:text="Apple Plant" />
+
+                    <!-- Health Status Section -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <!-- Status Icon -->
+                        <ImageView
+                            android:id="@+id/iv_status_icon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_health_check"
+                            android:layout_marginEnd="12dp"
+                            app:tint="@color/healthy_green"
+                            tools:tint="@color/disease_red" />
+
+                        <!-- Status Text -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_health_status"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Healthy Plant"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/healthy_green"
+                                tools:text="Apple Scab Detected"
+                                tools:textColor="@color/disease_red" />
+
+                            <TextView
+                                android:id="@+id/tv_confidence_detail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Confidence: 94.2%"
+                                android:textSize="14sp"
+                                android:textColor="@color/gray_medium"
+                                android:layout_marginTop="2dp"
+                                tools:text="Confidence: 87.3%" />
+
+                        </LinearLayout>
+
+                        <!-- Severity Indicator -->
+                        <LinearLayout
+                            android:id="@+id/layout_severity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:background="@drawable/bg_severity_indicator"
+                            android:padding="8dp"
+                            android:visibility="gone"
+                            tools:visibility="visible">
+
+                            <TextView
+                                android:id="@+id/tv_severity_level"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="HIGH"
+                                android:textSize="10sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/white"
+                                tools:text="HIGH" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="RISK"
+                                android:textSize="8sp"
+                                android:textColor="@color/white" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- Progress Bar for Confidence -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Detection Confidence"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/gray_dark"
+                            android:layout_marginBottom="8dp" />
+
+                        <ProgressBar
+                            android:id="@+id/progress_confidence"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp"
+                            android:progress="94"
+                            android:max="100"
+                            android:progressTint="@color/green_primary"
+                            android:progressBackgroundTint="@color/gray_light"
+                            tools:progress="87" />
+
+                    </LinearLayout>
+
+                    <!-- Quick Actions -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_save_result"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/save_result"
+                            style="@style/SecondaryButtonStyle"
+                            app:icon="@drawable/ic_save"
+                            app:iconGravity="start" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_share_result"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/share_result"
+                            style="@style/SecondaryButtonStyle"
+                            app:icon="@drawable/ic_share"
+                            app:iconGravity="start" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Top Predictions Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Top Predictions"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/gray_dark"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Top Predictions RecyclerView -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_top_predictions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        tools:listitem="@layout/item_prediction"
+                        tools:itemCount="3" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Disease Information Card (visible only for diseases) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_disease_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_info"
+                            android:layout_marginEnd="8dp"
+                            app:tint="@color/disease_red" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/disease_information"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/gray_dark" />
+
+                    </LinearLayout>
+
+                    <!-- Disease Description -->
+                    <TextView
+                        android:id="@+id/tv_disease_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Apple scab is a common fungal disease that affects apple trees. It appears as olive-green to brown spots on leaves and can cause early leaf drop."
+                        android:textSize="14sp"
+                        android:textColor="@color/gray_dark"
+                        android:lineSpacingExtra="2dp"
+                        android:layout_marginBottom="16dp"
+                        tools:text="Apple scab is a common fungal disease that affects apple trees." />
+
+                    <!-- Action Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_view_treatment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/view_treatment"
+                        style="@style/PrimaryButtonStyle"
+                        app:icon="@drawable/ic_medical"
+                        app:iconGravity="start" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Healthy Plant Tips Card (visible only for healthy plants) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_healthy_tips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- Header -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_tips"
+                            android:layout_marginEnd="8dp"
+                            app:tint="@color/healthy_green" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Plant Care Tips"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/gray_dark" />
+
+                    </LinearLayout>
+
+                    <!-- Tips List -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="• Keep soil consistently moist but not waterlogged\n• Ensure adequate sunlight exposure\n• Monitor for early signs of disease\n• Regular pruning for better air circulation"
+                        android:textSize="14sp"
+                        android:textColor="@color/gray_dark"
+                        android:lineSpacingExtra="4dp"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Learn More Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_learn_more"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Learn More About Plant Care"
+                        style="@style/SecondaryButtonStyle"
+                        app:icon="@drawable/ic_school"
+                        app:iconGravity="start" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Action Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:background="@color/surface_light"
+        android:elevation="8dp"
+        android:padding="16dp"
+        android:gravity="center">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_scan_another"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="Scan Another"
+            style="@style/SecondaryButtonStyle"
+            app:icon="@drawable/ic_camera"
+            app:iconGravity="start" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_view_history"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="View History"
+            style="@style/PrimaryButtonStyle"
+            app:icon="@drawable/ic_history"
+            app:iconGravity="start" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

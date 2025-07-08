@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="12dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Rank Number -->
+    <TextView
+        android:id="@+id/tv_rank"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:text="1"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="@drawable/circle_rank_background"
+        android:layout_marginEnd="12dp"
+        tools:text="1" />
+
+    <!-- Prediction Details -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_class_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apple: Apple Scab"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/gray_dark"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="Apple: Apple Scab" />
+
+        <TextView
+            android:id="@+id/tv_confidence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="87.3%"
+            android:textSize="14sp"
+            android:textColor="@color/gray_medium"
+            android:layout_marginTop="2dp"
+            tools:text="87.3%" />
+
+    </LinearLayout>
+
+    <!-- Confidence Progress Bar -->
+    <LinearLayout
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginStart="12dp">
+
+        <ProgressBar
+            android:id="@+id/progress_confidence"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:progress="87"
+            android:max="100"
+            android:progressTint="@color/green_primary"
+            android:progressBackgroundTint="@color/gray_light"
+            tools:progress="87" />
+
+        <TextView
+            android:id="@+id/tv_confidence_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="87%"
+            android:textSize="12sp"
+            android:textColor="@color/gray_medium"
+            android:layout_marginTop="4dp"
+            tools:text="87%" />
+
+    </LinearLayout>
+
+</LinearLayout>

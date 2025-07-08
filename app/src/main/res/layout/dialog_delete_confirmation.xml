@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="Delete this scan?"
+        android:textColor="@color/text_primary"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"
+        tools:text="Delete this scan?" />
+
+    <!-- Message -->
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Are you sure you want to delete this scan?"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp"
+        tools:text="Are you sure you want to delete the scan of Apple Tree?" />
+
+    <!-- Scan Preview (for single scan deletion) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/layout_scan_preview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:visibility="visible"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/gray_light">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <!-- Scan Image -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="12dp"
+                app:cardCornerRadius="6dp">
+
+                <ImageView
+                    android:id="@+id/iv_scan_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/placeholder_plant"
+                    tools:src="@drawable/placeholder_plant" />
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Scan Info -->
+            <TextView
+                android:id="@+id/tv_scan_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:lineSpacingExtra="2dp"
+                tools:text="Plant: Apple Tree\nStatus: Healthy\nConfidence: 95%\nDate: Today, 2:30 PM" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Image Deletion Option -->
+    <LinearLayout
+        android:id="@+id/layout_image_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_severity_indicator"
+        android:backgroundTint="@color/warning_orange"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_photo_library"
+            android:tint="@color/warning_orange" />
+
+        <CheckBox
+            android:id="@+id/cb_delete_images"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:fontFamily="sans-serif-medium"
+            android:text="Also delete the associated image file"
+            android:textColor="@color/warning_orange"
+            android:textSize="14sp"
+            tools:text="Also delete 3 associated image files" />
+
+    </LinearLayout>
+
+    <!-- Warning Text -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_severity_indicator"
+        android:backgroundTint="@color/disease_red"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_warning"
+            android:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_warning_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:text="This action cannot be undone."
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            tools:text="⚠️ This will permanently delete your entire scan history and cannot be undone." />
+
+    </LinearLayout>
+
+</LinearLayout>

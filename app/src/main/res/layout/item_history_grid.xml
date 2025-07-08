@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Plant Image Container -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            android:layout_margin="8dp">
+
+            <ImageView
+                android:id="@+id/iv_plant_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder_plant"
+                android:contentDescription="Plant image" />
+
+            <!-- Health Status Badge -->
+            <ImageView
+                android:id="@+id/iv_health_badge"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="top|start"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_health_check"
+                android:background="@drawable/circle_shape"
+                android:backgroundTint="@color/white"
+                android:padding="4dp"
+                app:tint="@color/healthy_green"
+                tools:src="@drawable/ic_warning"
+                tools:tint="@color/disease_red" />
+
+            <!-- Confidence Badge -->
+            <TextView
+                android:id="@+id/tv_confidence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:layout_margin="8dp"
+                android:text="94%"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_confidence_mini_badge"
+                android:padding="6dp"
+                tools:text="87%"
+                tools:textColor="@color/disease_red" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Content Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:paddingTop="0dp">
+
+            <!-- Plant Name -->
+            <TextView
+                android:id="@+id/tv_plant_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apple Plant"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/gray_dark"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginBottom="4dp"
+                tools:text="Tomato Plant" />
+
+            <!-- Scan Date -->
+            <TextView
+                android:id="@+id/tv_scan_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Today"
+                android:textSize="12sp"
+                android:textColor="@color/gray_medium"
+                android:layout_marginBottom="8dp"
+                tools:text="2 hours ago" />
+
+            <!-- Health Status -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Status Indicator -->
+                <View
+                    android:id="@+id/view_status_indicator"
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/circle_shape"
+                    android:backgroundTint="@color/healthy_green" />
+
+                <TextView
+                    android:id="@+id/tv_health_status"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Healthy"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/healthy_green"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    tools:text="Disease Detected"
+                    tools:textColor="@color/disease_red" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

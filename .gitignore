@@ -1,0 +1,55 @@
+# Built application files
+*.apk
+*.ap_
+*.aab
+
+# Gradle files
+.gradle/
+build/
+**/build/
+!gradle-wrapper.jar
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Log files
+*.log
+
+# Android Studio
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+
+# Keystore files
+*.jks
+*.keystore
+
+# Miscellaneous
+.DS_Store
+*.swp
+*.swo
+
+# Node modules (if using React Native or similar)
+node_modules/
+
+# Coverage
+coverage/
+
+# Crashlytics / Firebase
+crashlytics-build.properties
+fabric.properties
+
+# IntelliJ
+out/
+
+# Others
+*.orig
+*.rej
+*.bak

@@ -1,0 +1,80 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120"
+    android:tint="?attr/colorOnSurface">
+  
+  <!-- Pot -->
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M30,80 L30,110 L90,110 L90,80 L85,60 L35,60 Z"/>
+  
+  <!-- Pot rim -->
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M32,60 L88,60 L88,65 L32,65 Z"/>
+  
+  <!-- Main stem -->
+  <path
+      android:fillColor="@android:color/white"
+      android:strokeWidth="2"
+      android:pathData="M60,60 L60,30"/>
+  
+  <!-- Main leaves (center) -->
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M45,35 Q50,25 60,30 Q70,25 75,35 Q70,45 60,40 Q50,45 45,35 Z"/>
+  
+  <!-- Left branch and leaves -->
+  <path
+      android:fillColor="@android:color/white"
+      android:strokeWidth="1.5"
+      android:pathData="M55,45 Q45,40 40,30"/>
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M35,25 Q40,20 45,25 Q40,30 35,25 Z"/>
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M30,35 Q35,30 40,35 Q35,40 30,35 Z"/>
+  
+  <!-- Right branch and leaves -->
+  <path
+      android:fillColor="@android:color/white"
+      android:strokeWidth="1.5"
+      android:pathData="M65,45 Q75,40 80,30"/>
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M85,25 Q80,20 75,25 Q80,30 85,25 Z"/>
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M90,35 Q85,30 80,35 Q85,40 90,35 Z"/>
+  
+  <!-- Care symbols around the plant -->
+  <!-- Water drop -->
+  <path
+      android:fillColor="@android:color/white"
+      android:fillAlpha="0.7"
+      android:pathData="M20,70 Q20,65 25,65 Q30,65 30,70 Q30,75 25,75 Q20,75 20,70 Z"/>
+  
+  <!-- Sun rays -->
+  <path
+      android:fillColor="@android:color/white"
+      android:fillAlpha="0.7"
+      android:pathData="M95,15 L100,10 L105,15 L100,20 Z"/>
+  <path
+      android:fillColor="@android:color/white"
+      android:fillAlpha="0.7"
+      android:pathData="M100,5 L100,25"/>
+  <path
+      android:fillColor="@android:color/white"
+      android:fillAlpha="0.7"
+      android:pathData="M90,10 L110,10"/>
+  
+  <!-- Soil -->
+  <path
+      android:fillColor="@android:color/white"
+      android:fillAlpha="0.6"
+      android:pathData="M35,80 L85,80 L85,85 L35,85 Z"/>
+  
+</vector>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Search -->
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search"
+        android:title="Search"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+    <!-- Filter -->
+    <item
+        android:id="@+id/action_filter"
+        android:icon="@drawable/ic_filter"
+        android:title="Filter"
+        app:showAsAction="ifRoom" />
+
+    <!-- Sort -->
+    <item
+        android:id="@+id/action_sort"
+        android:icon="@drawable/ic_sort"
+        android:title="Sort"
+        app:showAsAction="ifRoom" />
+
+    <!-- View Toggle -->
+    <item
+        android:id="@+id/action_view_toggle"
+        android:icon="@drawable/ic_view_grid"
+        android:title="Toggle View"
+        app:showAsAction="ifRoom" />
+
+    <!-- Select All -->
+    <item
+        android:id="@+id/action_select_all"
+        android:title="Select All"
+        app:showAsAction="never" />
+
+    <!-- Export -->
+    <item
+        android:id="@+id/action_export"
+        android:icon="@drawable/ic_share"
+        android:title="Export Data"
+        app:showAsAction="never" />
+
+    <!-- Delete All -->
+    <item
+        android:id="@+id/action_delete_all"
+        android:icon="@drawable/ic_delete"
+        android:title="Delete All Scans"
+        app:showAsAction="never" />
+
+    <!-- Statistics -->
+    <item
+        android:id="@+id/action_statistics"
+        android:icon="@drawable/ic_analytics"
+        android:title="View Statistics"
+        app:showAsAction="never" />
+
+    <!-- Settings -->
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="Settings"
+        app:showAsAction="never" />
+
+</menu>

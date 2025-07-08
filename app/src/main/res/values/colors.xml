@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Green Colors -->
+    <color name="primary_color">#4CAF50</color>
+    <color name="green_primary">#4CAF50</color>
+    <color name="green_primary_dark">#388E3C</color>
+    <color name="green_primary_light">#C8E6C9</color>
+
+    <!-- Accent Colors -->
+    <color name="green_accent">#8BC34A</color>
+    <color name="green_accent_dark">#689F38</color>
+    <color name="green_accent_light">#DCEDC8</color>
+
+    <!-- Status Colors -->
+    <color name="healthy_green">#4CAF50</color>
+    <color name="disease_red">#F44336</color>
+    <color name="warning_orange">#FF9800</color>
+
+    <!-- Neutral Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray_light">#F5F5F5</color>
+    <color name="gray_medium">#9E9E9E</color>
+    <color name="gray_dark">#424242</color>
+
+    <!-- Background Colors -->
+    <color name="background_light">#FAFAFA</color>
+    <color name="background_color">#FAFAFA</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="card_background">#FFFFFF</color>
+
+    <!-- Transparent Colors -->
+    <color name="black_overlay">#80000000</color>
+    <color name="white_overlay">#80FFFFFF</color>
+
+    <color name="rank_first">#FFD700</color>      <!-- Gold -->
+    <color name="rank_second">#C0C0C0</color>     <!-- Silver -->
+    <color name="rank_third">#CD7F32</color>      <!-- Bronze -->
+
+    <!-- Primary Color Variants -->
+    <color name="primary_50">#E8F5E8</color>      <!-- Very light green -->
+
+
+    <!-- Text Colors -->
+    <color name="text_primary">#212121</color>    <!-- Dark gray for primary text -->
+    <color name="text_secondary">#757575</color>  <!-- Medium gray for secondary text -->
+</resources>

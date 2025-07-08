@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing and Dimensions -->
+    <dimen name="margin_tiny">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_xl">32dp</dimen>
+    
+    <!-- Text Sizes -->
+    <dimen name="text_size_tiny">10sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_normal">14sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_xl">20sp</dimen>
+    <dimen name="text_size_xxl">24sp</dimen>
+    
+    <!-- Card and Button Dimensions -->
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_corner_radius">12dp</dimen>
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_corner_radius">8dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    
+    <!-- Image Sizes -->
+    <dimen name="image_size_small">32dp</dimen>
+    <dimen name="image_size_medium">48dp</dimen>
+    <dimen name="image_size_large">64dp</dimen>
+    <dimen name="image_size_xl">96dp</dimen>
+    
+    <!-- Camera and Capture -->
+    <dimen name="capture_button_size">80dp</dimen>
+    <dimen name="camera_control_size">48dp</dimen>
+    
+    <!-- Progress and Indicators -->
+    <dimen name="progress_bar_height">8dp</dimen>
+    <dimen name="indicator_size">12dp</dimen>
+    
+    <!-- List Items -->
+    <dimen name="list_item_height">72dp</dimen>
+    <dimen name="list_item_padding">16dp</dimen>
+    
+    <!-- Toolbar and App Bar -->
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="app_bar_height">200dp</dimen>
+</resources>
