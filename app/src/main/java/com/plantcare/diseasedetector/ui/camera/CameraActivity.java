@@ -36,7 +36,7 @@ import com.plantcare.diseasedetector.R;
 import com.plantcare.diseasedetector.data.database.AppDatabase;
 import com.plantcare.diseasedetector.data.models.ScanResult;
 import com.plantcare.diseasedetector.ml.PlantDiseaseClassifier;
-import com.plantcare.diseasedetector.ml.ModelDebugger;
+
 import com.plantcare.diseasedetector.ui.results.ResultsActivity;
 import com.plantcare.diseasedetector.utils.ImageUtils;
 import com.plantcare.diseasedetector.utils.PermissionUtils;
@@ -312,7 +312,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         if (!isModelLoaded) {
-            showToast("Real PyTorch model not ready - please wait for loading to complete");
+            showToast("PyTorch model not ready - please wait for loading to complete");
             Log.w(TAG, "Photo capture blocked - PyTorch model not loaded");
             return;
         }
@@ -365,7 +365,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
      * Load AI model in background
      */
     private void loadAIModel() {
-        showLoadingOverlay("Loading AI model...");
+        showLoadingOverlay("Loading MOCK AI model...");
         updateAIStatus("Loading...", false);
 
         cameraExecutor.execute(() -> {
@@ -378,30 +378,15 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                     if (loaded) {
                         isModelLoaded = true;
                         updateAIStatus("AI Model Ready", true);
-                        showToast("Real PyTorch model loaded!");
-                        Log.i(TAG, "Real PyTorch model successfully loaded and ready for predictions");
+                        showToast("PyTorch model loaded successfully!");
+                        Log.i(TAG, "PyTorch model successfully loaded and ready for predictions");
                         
-                        // 🔬 DEBUGGING: Test if model always predicts the same thing
-                        Log.i(TAG, "🔬 Starting model responsiveness test...");
-                        cameraExecutor.execute(() -> {
-                            ModelDebugger.DebugResult debugResult = ModelDebugger.testModelResponsiveness(CameraActivity.this);
-                            if (!debugResult.isModelResponsive) {
-                                Log.e(TAG, "🚨 CRITICAL: Model is not responsive - always predicts same class!");
-                                Log.e(TAG, "Predictions: " + debugResult.predictions.toString());
-                                mainHandler.post(() -> {
-                                    showToast("⚠️ Model issue detected - check logs");
-                                });
-                            } else {
-                                Log.i(TAG, "✅ Model responsiveness test passed");
-                                Log.i(TAG, "Predictions: " + debugResult.predictions.toString());
-                            }
-                        });
-                        // End debugging
+                        Log.i(TAG, "Model loaded successfully and ready for use");
                     } else {
                         isModelLoaded = false;
                         updateAIStatus("Model Failed", false);
                         showToast("Failed to load PyTorch model - check model file");
-                        Log.e(TAG, "Failed to load the real PyTorch model from assets");
+                        Log.e(TAG, "Failed to load the PyTorch model from assets");
                     }
                 });
 
@@ -423,7 +408,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     private void processImage(String imagePath) {
         if (!isModelLoaded || plantClassifier == null) {
             hideProgress();
-            showToast("Real PyTorch model not loaded - cannot analyze image");
+            showToast("PyTorch model not loaded - cannot analyze image");
             Log.e(TAG, "Attempted to process image without loaded PyTorch model");
             return;
         }
@@ -445,20 +430,11 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                 Log.d(TAG, "Processing image: " + imagePath + " (" + bitmap.getWidth() + "x" + bitmap.getHeight() + ")");
 
                 // Classify with AI model
-                PlantDiseaseClassifier.ClassificationResult result = plantClassifier.predict(bitmap);
+                PlantDiseaseClassifier.PredictionResult result = plantClassifier.predict(bitmap);
 
-                if (result != null && validateClassificationResult(result)) {
-                    // FIXED: Handle background detection in UI
-                    if (result.isBackground()) {
-                        mainHandler.post(() -> {
-                            hideProgress();
-                            showBackgroundDetectedDialog();
-                        });
-                        return;
-                    }
-
-                    // Create and save scan result for actual plants
-                    ScanResult scanResult = createValidatedScanResult(imagePath, result);
+                if (result != null) {
+                    // Create and save scan result
+                    ScanResult scanResult = createScanResult(imagePath, result);
 
                     try {
                         long scanId = database.scanResultDao().insertScanResult(scanResult);
@@ -476,7 +452,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                         });
                     }
                 } else {
-                    Log.e(TAG, "Invalid classification result: " + (result != null ? result.toString() : "null"));
+                    Log.e(TAG, "AI prediction failed");
                     mainHandler.post(() -> {
                         hideProgress();
                         showToast("AI analysis failed - please try again");
@@ -493,118 +469,28 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
-    /**
-     * FIXED: Enhanced validation with background class support
-     */
-    private boolean validateClassificationResult(PlantDiseaseClassifier.ClassificationResult result) {
-        if (result == null) {
-            Log.e(TAG, "Classification result is null");
-            return false;
-        }
 
-        // Check for required fields
-        if (result.className == null || result.className.trim().isEmpty()) {
-            Log.e(TAG, "Classification result has null or empty className");
-            return false;
-        }
-
-        // Validate confidence range (0.0 to 1.0)
-        if (Float.isNaN(result.confidence) || Float.isInfinite(result.confidence)) {
-            Log.e(TAG, "Classification result has invalid confidence: " + result.confidence);
-            return false;
-        }
-
-        if (result.confidence < 0.0f || result.confidence > 1.0f) {
-            Log.w(TAG, "Classification confidence out of range [0,1]: " + result.confidence);
-            // Clamp to valid range instead of rejecting
-        }
-
-        // Validate class index
-        if (result.classIndex < 0) {
-            Log.e(TAG, "Classification result has negative classIndex: " + result.classIndex);
-            return false;
-        }
-
-        // FIXED: Accept background detection as valid result
-        if (result.isBackground()) {
-            Log.d(TAG, "Background detection result validated: " + result.toString());
-            return true;
-        }
-
-        Log.d(TAG, "Plant classification result validation passed: " + result.toString());
-        return true;
-    }
 
     /**
-     * FIXED: Create ScanResult with proper background handling
+     * Create ScanResult from prediction result
      */
-    private ScanResult createValidatedScanResult(String imagePath, PlantDiseaseClassifier.ClassificationResult result) {
+    private ScanResult createScanResult(String imagePath, PlantDiseaseClassifier.PredictionResult result) {
         ScanResult scanResult = new ScanResult();
 
-        // Set required fields with validation
+        // Set basic fields
         scanResult.setImagePath(imagePath != null ? imagePath : "");
-        scanResult.setPredictedClass(result.className != null ? result.className : "Unknown");
-        scanResult.setPredictedIndex(Math.max(0, result.classIndex));
+        scanResult.setPredictedClass(result.className);
+        scanResult.setPredictedIndex(0); // Not needed for minimal implementation
+        scanResult.setConfidence(result.confidence);
+        scanResult.setPlantName(result.plantName);
+        scanResult.setDiseaseName(result.diseaseName);
+        scanResult.setHealthy(result.isHealthy);
 
-        // Ensure confidence is in valid range
-        float validatedConfidence = result.confidence;
-        if (Float.isNaN(validatedConfidence) || Float.isInfinite(validatedConfidence)) {
-            validatedConfidence = 0.3f; // Default confidence
-            Log.w(TAG, "Using default confidence due to invalid value");
-        } else {
-            validatedConfidence = Math.max(0.0f, Math.min(1.0f, validatedConfidence));
-        }
-        scanResult.setConfidence(validatedConfidence);
-
-        // FIXED: Handle background detection properly
-        if (result.isBackground()) {
-            scanResult.setPlantName("No Plant Detected");
-            scanResult.setDiseaseName("Background Image");
-            scanResult.setHealthy(false); // Background is not healthy, it's just not a plant
-            
-            Log.i(TAG, "Background/non-plant image detected");
-        } else {
-            // Normal plant processing
-            String plantType = result.getPlantType();
-            scanResult.setPlantName(plantType != null && !plantType.trim().isEmpty() ? plantType : "Unknown Plant");
-
-            String diseaseType = result.getDiseaseType();
-            scanResult.setDiseaseName(diseaseType != null && !diseaseType.trim().isEmpty() ? diseaseType : "Unknown");
-
-            scanResult.setHealthy(result.isHealthy());
-        }
-
-        Log.d(TAG, "Created validated ScanResult: " + scanResult.toString());
+        Log.d(TAG, "Created ScanResult: " + scanResult.toString());
         return scanResult;
     }
 
-    /**
-     * FIXED: Show dialog when background/non-plant is detected
-     */
-    private void showBackgroundDetectedDialog() {
-        try {
-            new AlertDialog.Builder(this)
-                .setTitle("No Plant Detected")
-                .setMessage("The AI couldn't detect a plant in this image. Please:\n\n" +
-                           "• Point the camera at a plant leaf\n" +
-                           "• Ensure good lighting\n" +
-                           "• Get closer to the plant\n" +
-                           "• Avoid backgrounds like roads, cars, or sky")
-                .setPositiveButton("Try Again", (dialog, which) -> {
-                    // User can try taking another photo
-                    dialog.dismiss();
-                })
-                .setNegativeButton("Choose from Gallery", (dialog, which) -> {
-                    openGallery();
-                    dialog.dismiss();
-                })
-                .setCancelable(true)
-                .show();
-        } catch (Exception e) {
-            Log.e(TAG, "Error showing background dialog", e);
-            showToast("No plant detected in image - please try again");
-        }
-    }
+
 
     /**
      * Open results activity
@@ -641,7 +527,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
      */
     private void processGalleryImage(Uri imageUri) {
         if (!isModelLoaded) {
-            showToast("Real PyTorch model not ready - cannot process gallery image");
+            showToast("PyTorch model not ready - cannot process gallery image");
             Log.w(TAG, "Gallery processing blocked - PyTorch model not loaded");
             return;
         }
